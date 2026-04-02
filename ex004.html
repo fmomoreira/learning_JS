@@ -12,10 +12,10 @@
 </head>
 <body>
     <script>
-        var nome = window.prompt("Qual o seu nome?")
-        document.write(`Olá <strong>${nome}</strong>!, Seu nome tem ${nome.length} letras.<br/>`)
-        document.write(`Seu nome em maiusculas é ${nome.toUpperCase()}<br/>`)
-        document.write(`Seu nome em minuscula é ${nome.toLowerCase()}`)
-    </script>
+        var nome = window.prompt("Qual o seu nome?") //  .toLocaleString('pt-BR' , {style: 'currency' , currency: 'BRL'}) para localizar e definir um valor monetário
+        document.write(`Olá <strong>${nome}</strong>!, Seu nome tem ${nome.length} letras.<br/>`) //<strong> para deixar em negrito </strong>
+        document.write(`Seu nome em maiusculas é ${nome.toUpperCase()}<br/>`) // <br/> para quebrar linha
+        document.write(`Seu nome em minuscula é ${nome.toLowerCase()}`) // .toFixed(2) para controlar as casas decimais de um número
+    </script>              
 </body>
 </html>
