@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register System</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+        }
+        
+        .form-section {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .results-section {
+            flex: 2;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 1rem;
+        }
+        
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to right, #ff8a00, #da1b60);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .search-box {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-box input {
+            flex: 1;
+        }
+        
+        .entry-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .entry-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid #ff8a00;
+        }
+        
+        .entry-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .entry-details {
+            flex: 1;
+        }
+        
+        .entry-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .entry-details p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .entry-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .delete-btn {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
+        .stat-box {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff8a00;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .no-entries {
+            text-align: center;
+            padding: 30px;
+            font-style: italic;
+            opacity: 0.7;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateX(200%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            border-left: 4px solid #00c853;
+        }
+        
+        .notification.error {
+            border-left: 4px solid #ff5252;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Register System</h1>
+            <p class="subtitle">Manage your register entries with this intuitive system</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="form-section">
+                <h2>Add New Entry</h2>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Enter full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter email address" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Enter phone number">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" required>
+                            <option value="">Select a category</option>
+                            <option value="student">Student</option>
+                            <option value="employee">Employee</option>
+                            <option value="customer">Customer</option>
+                            <option value="vendor">Vendor</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" required>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit">Add to Register</button>
+                </form>
+            </div>
+            
+            <div class="results-section">
+                <h2>Register Entries</h2>
+                
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search entries...">
+                    <button id="clearSearch">Clear</button>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="totalEntries">0</div>
+                        <div class="stat-label">Total Entries</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="activeEntries">0</div>
+                        <div class="stat-label">Active</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="pendingEntries">0</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                </div>
+                
+                <div class="entry-list" id="entryList">
+                    <div class="no-entries">No entries found. Add your first entry!</div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Register System &copy; 2023 | Secure Data Management</p>
+        </footer>
+    </div>
+    
+    <div class="notification" id="notification"></div>
+    
+    <script>
+        // Sample initial data
+        let registerEntries = [
+            {
+                id: 1,
+                name: "John Smith",
+                email: "john.smith@example.com",
+                phone: "+1 234 567 8900",
+                category: "student",
+                status: "active",
+                date: "2023-05-15"
+            },
+            {
+                id: 2,
+                name: "Emily Johnson",
+                email: "emily.j@example.com",
+                phone: "+1 987 654 3210",
+                category: "employee",
+                status: "active",
+                date: "2023-06-22"
+            },
+            {
+                id: 3,
+                name: "Michael Brown",
+                email: "m.brown@example.com",
+                phone: "+1 456 789 0123",
+                category: "customer",
+                status: "pending",
+                date: "2023-07-10"
+            }
+        ];
+        
+        let nextId = 4;
+        
+        // DOM Elements
+        const registerForm = document.getElementById('registerForm');
+        const entryList = document.getElementById('entryList');
+        const searchInput = document.getElementById('searchInput');
+        const clearSearch = document.getElementById('clearSearch');
+        const totalEntriesEl = document.getElementById('totalEntries');
+        const activeEntriesEl = document.getElementById('activeEntries');
+        const pendingEntriesEl = document.getElementById('pendingEntries');
+        const notification = document.getElementById('notification');
+        
+        // Initialize the system
+        document.addEventListener('DOMContentLoaded', function() {
+            renderEntries();
+            updateStats();
+            
+            // Form submission
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                addEntry();
+            });
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                filterEntries();
+            });
+            
+            clearSearch.addEventListener('click', function() {
+                searchInput.value = '';
+                filterEntries();
+            });
+        });
+        
+        // Add new entry
+        function addEntry() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const category = document.getElementById('category').value;
+            const status = document.getElementById('status').value;
+            
+            if (!name || !email || !category || !status) {
+                showNotification('Please fill all required fields', 'error');
+                return;
+            }
+            
+            const newEntry = {
+                id: nextId++,
+                name,
+                email,
+                phone,
+                category,
+                status,
+                date: new Date().toISOString().split('T')[0]
+            };
+            
+            registerEntries.push(newEntry);
+            renderEntries();
+            updateStats();
+            showNotification('Entry added successfully!', 'success');
+            
+            // Reset form
+            registerForm.reset();
+        }
+        
+        // Render entries to the DOM
+        function renderEntries(entries = registerEntries) {
+            if (entries.length === 0) {
+                entryList.innerHTML = '<div class="no-entries">No entries found. Add your first entry!</div>';
+                return;
+            }
+            
+            entryList.innerHTML = '';
+            
+            entries.forEach(entry => {
+                const entryElement = document.createElement('div');
+                entryElement.className = 'entry-item';
+                entryElement.innerHTML = `
+                    <div class="entry-details">
+                        <div class="entry-name">${entry.name}</div>
+                        <p><strong>Email:</strong> ${entry.email}</p>
+                        <p><strong>Phone:</strong> ${entry.phone || 'N/A'}</p>
+                        <p><strong>Category:</strong> ${formatCategory(entry.category)}</p>
+                        <p><strong>Status:</strong> <span class="status-${entry.status}">${formatStatus(entry.status)}</span></p>
+                        <p><strong>Date:</strong> ${entry.date}</p>
+                    </div>
+                    <div class="entry-actions">
+                        <button class="action-btn delete-btn" onclick="deleteEntry(${entry.id})">Delete</button>
+                    </div>
+                `;
+                entryList.appendChild(entryElement);
+            });
+        }
+        
+        // Format category for display
+        function formatCategory(category) {
+            const categories = {
+                'student': 'Student',
+                'employee': 'Employee',
+                'customer': 'Customer',
+                'vendor': 'Vendor',
+                'other': 'Other'
+            };
+            return categories[category] || category;
+        }
+        
+        // Format status for display
+        function formatStatus(status) {
+            const statuses = {
+                'active': 'Active',
+                'inactive': 'Inactive',
+                'pending': 'Pending'
+            };
+            return statuses[status] || status;
+        }
+        
+        // Delete entry
+        function deleteEntry(id) {
+            if (confirm('Are you sure you want to delete this entry?')) {
+                registerEntries = registerEntries.filter(entry => entry.id !== id);
+                renderEntries();
+                updateStats();
+                showNotification('Entry deleted successfully!', 'success');
+            }
+        }
+        
+        // Filter entries based on search
+        function filterEntries() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            if (!searchTerm) {
+                renderEntries();
+                return;
+            }
+            
+            const filteredEntries = registerEntries.filter(entry => 
+                entry.name.toLowerCase().includes(searchTerm) ||
+                entry.email.toLowerCase().includes(searchTerm) ||
+                entry.phone.toLowerCase().includes(searchTerm) ||
+                entry.category.toLowerCase().includes(searchTerm) ||
+                entry.status.toLowerCase().includes(searchTerm)
+            );
+            
+            renderEntries(filteredEntries);
+        }
+        
+        // Update statistics
+        function updateStats() {
+            totalEntriesEl.textContent = registerEntries.length;
+            
+            const activeCount = registerEntries.filter(entry => entry.status === 'active').length;
+            const pendingCount = registerEntries.filter(entry => entry.status === 'pending').length;
+            
+            activeEntriesEl.textContent = activeCount;
+            pendingEntriesEl.textContent = pendingCount;
+        }
+        
+        // Show notification
+        function showNotification(message, type) {
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
