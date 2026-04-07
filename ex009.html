@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nacionalidade Aula 11</title>
+    <style>
+        body {
+            background-color: cornflowerblue;
+            color:darkblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gerenciamento de Nacionalidaes</h1>
+    Digite seu páís de Origem: <input type="text" name="país" id="país"> <br>
+    Você está mentindo?  SIM <input type="checkbox" name="sim" id="sim">  NÃO <input type="checkbox" name="não" id="não">
+    <input type="button" value="Submeter" onclick="clicar()">
+    <p id="Info">
+
+    </p>
+    <div class="res">
+
+    </div>
+    
+    <script>
+        var pais = window.document.querySelector('input#país')
+        var sim = window.document.querySelector('input#sim')
+        var nao = window.document.querySelector('input#não')
+        var info = window.document.getElementById('Info')
+        var res = window.document.getElementsByClassName('res')[0]
+
+        function clicar() {
+            if (sim.checked && nao.checked) {
+                info.innerHTML = '<p>Você selecionou sim e não ao mesmo tempo.<p>'
+                res.innerHTML = `<p><strong>MENTIR É FEIO.</strong><p>`
+            } else if (sim.checked) {
+                info.innerHTML = '<p>A necessidade de mentir?<p>'
+                res.innerHTML = "<p>Fale a Verdade!<p>"
+            } else if (nao.checked) {
+                info.innerText = 'Baseado nas informações acima...'
+                if (pais.value == 'Brasil') {
+                    res.innerHTML = 'Parabéns, Você é Brasileiro!'
+                } else {
+                    res.innerHTML = 'Você é gringo.'
+                }
+            }
+            else {
+                info.innerHTML = '<p>Você não marcou as caixas de seleção<p>'
+                res.innerHTML = '<p>Está querendo mentir é?<p>'
+            }
+
+        }
+
+    </script>
+</body>
+</html>
