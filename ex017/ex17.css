@@ -1,11 +1,11 @@
 body {
-    background: rgb(29, 29, 252);
+    background: rgb(206, 47, 47);
     font: normal 18pt Arial;
-    color: rgb(2, 2, 82);
+    color: rgb(179, 197, 21);
 }
 
 header {
-    color: white;
+    color: rgb(253, 237, 13);
     text-align: center;
 }
 
